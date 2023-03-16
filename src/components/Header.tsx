@@ -19,7 +19,7 @@ export default function Header() {
                     </div>
                 </div>
                 <div>
-                    <button className="p-4 bg-black text-white">
+                    <button className="p-4 bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black">
                         Join Seller{"'"}s Dao
                     </button>
                 </div>
