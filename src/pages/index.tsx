@@ -6,6 +6,7 @@ export default function Home() {
     <div>
       <Head>
         <title>ScrollCom</title>
+        <link rel="icon" href="/logo.png" />
       </Head>
       <main>
         <Header />
