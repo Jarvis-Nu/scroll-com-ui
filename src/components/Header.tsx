@@ -3,7 +3,7 @@ import { SearchIcon } from "@heroicons/react/outline"
 
 export default function Header() {
     return(
-        <div className="w-full shadow-black shadow flex justify-center items-center py-5">
+        <div className="w-full shadow-sm shadow-[#282828]/5 flex justify-center items-center py-5">
             <div className="max-w-[750px] lg:max-w-4xl xl:max-w-6xl w-full flex justify-between items-center">
                 <div>
                     <Image src={"/logo.png"} width={200} height={50} alt="Logo" />
