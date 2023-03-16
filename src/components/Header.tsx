@@ -6,7 +6,7 @@ export default function Header() {
         <div className="w-full shadow-black shadow flex justify-center items-center py-5">
             <div className="max-w-[750px] lg:max-w-4xl xl:max-w-6xl w-full flex justify-between items-center">
                 <div>
-                    <Image src={"/logo.png"} width={200} height={50} />
+                    <Image src={"/logo.png"} width={200} height={50} alt="Logo" />
                 </div>
                 <div className="flex items-center">
                     <div>
