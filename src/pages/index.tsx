@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <Header />
-        <div>
+        <div className="h-full w-full bg-[#282828]/5 flex justify-center items-center py-5">
           <Main />
         </div>
       </main>
