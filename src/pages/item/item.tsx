@@ -3,6 +3,7 @@ import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import { ChatAlt2Icon } from "@heroicons/react/solid"
+import Card from "@/components/Card"
 
 export default function Item() {
     return(
@@ -53,6 +54,27 @@ export default function Item() {
                                         Purchase for 0.02SETH
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="h-full w-full bg-[#282828]/5 flex justify-center items-center py-5">
+                    <div className="max-w-[750px] lg:max-w-4xl xl:max-w-6xl w-full flex justify-between items-center bg-white">
+                        <div className="w-full p-5">
+                            <div>
+                                <h2 className="text-2xl font-semibold">More watches</h2>
+                            </div>
+                            <div className="w-full flex overflow-x-scroll overflow-y-hidden scrollbar-hide">
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
                             </div>
                         </div>
                     </div>
