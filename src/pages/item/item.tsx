@@ -16,13 +16,13 @@ export default function Item() {
                 <Header />
                 <div className="h-full w-full bg-[#282828]/5 flex justify-center items-center py-5">
                     <div className="max-w-[750px] lg:max-w-4xl xl:max-w-6xl w-full flex justify-between items-center bg-white">
-                        <div className="w-full flex justify-center space-x-[40px] p-5">
+                        <div className="w-full flex flex-col sm:flex justify-center sm:space-x-[40px] p-5">
                             <div>
                                 <div className="w-[275px] xl:w-[350px] xl:h-[325px] h-[225px] relative">
                                     <Image src={"/image.jpg"} layout="fill" />
                                 </div>
                             </div>
-                            <div className="w-[500px] space-y-2.5">
+                            <div className="w-[300px] sm:w-[500px] space-y-2.5">
                                 <h2 className="text-2xl">Fngeen Men{"'"}s Luxury Diamond Waterproof Quartz Watch - Gold</h2>
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consectetur odit tempore 
@@ -49,7 +49,7 @@ export default function Item() {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="w-full">
+                                <div className="w-[275px] sm:w-full">
                                     <button className="w-full bg-black text-white py-2.5">
                                         Purchase for 0.02SETH
                                     </button>
