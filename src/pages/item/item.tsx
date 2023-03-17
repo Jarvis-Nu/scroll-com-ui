@@ -22,7 +22,7 @@ export default function Item() {
                                     <Image src={"/image.jpg"} layout="fill" />
                                 </div>
                             </div>
-                            <div className="w-[300px] sm:w-[500px] space-y-2.5">
+                            <div className="w-[275px] sm:w-[500px] space-y-2.5">
                                 <h2 className="text-2xl">Fngeen Men{"'"}s Luxury Diamond Waterproof Quartz Watch - Gold</h2>
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consectetur odit tempore 
