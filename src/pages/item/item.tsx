@@ -1,6 +1,8 @@
 import Head from "next/head"
 import Header from "../../components/Header"
 import Image from "next/legacy/image"
+import { SocialIcon } from "react-social-icons"
+import { ChatAlt2Icon } from "@heroicons/react/solid"
 
 export default function Item() {
     return(
@@ -19,13 +21,33 @@ export default function Item() {
                                     <Image src={"/image.jpg"} layout="fill" />
                                 </div>
                             </div>
-                            <div className="w-[500px] space-y-5">
+                            <div className="w-[500px] space-y-2.5">
                                 <h2 className="text-2xl">Fngeen Men{"'"}s Luxury Diamond Waterproof Quartz Watch - Gold</h2>
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consectetur odit tempore 
                                     nemo delectus, error ipsa esse omnis? Dignissimos consequuntur perspiciatis harum minus 
                                     tempora eligendi unde voluptates. Autem, ipsum voluptates.
                                 </p>
+                                <div className="space-y-1.5">
+                                    <h5 className="text-lg font-semibold">Contact seller</h5>
+                                    <div className="flex space-x-1.5">
+                                        <button>
+                                            <ChatAlt2Icon className="w-10 h-10" />
+                                        </button>
+                                        <button>
+                                            <SocialIcon url="https://facebook.com" />
+                                        </button>
+                                        <button>
+                                            <SocialIcon url="https://discord.com" />
+                                        </button>
+                                        <button>
+                                            <SocialIcon url="https://twitter.com" />
+                                        </button>
+                                        <button>
+                                            <SocialIcon url="https://mail.google.com" />
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
