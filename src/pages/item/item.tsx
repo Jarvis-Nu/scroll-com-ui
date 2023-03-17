@@ -48,6 +48,11 @@ export default function Item() {
                                         </button>
                                     </div>
                                 </div>
+                                <div className="w-full">
+                                    <button className="w-full bg-black text-white py-2.5">
+                                        Purchase for 0.02SETH
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
