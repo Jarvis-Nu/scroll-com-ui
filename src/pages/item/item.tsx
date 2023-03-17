@@ -16,7 +16,7 @@ export default function Item() {
                 <Header />
                 <div className="h-full w-full bg-[#282828]/5 flex justify-center items-center py-5">
                     <div className="max-w-[750px] lg:max-w-4xl xl:max-w-6xl w-full flex justify-between items-center bg-white">
-                        <div className="w-full flex flex-col sm:flex justify-center sm:space-x-[40px] p-5">
+                        <div className="w-full flex flex-col sm:flex-row justify-center sm:space-x-[40px] p-5">
                             <div>
                                 <div className="w-[275px] xl:w-[350px] xl:h-[325px] h-[225px] relative">
                                     <Image src={"/image.jpg"} layout="fill" />
