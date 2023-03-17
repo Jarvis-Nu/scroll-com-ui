@@ -8,7 +8,7 @@ export default function Card() {
                 <div className="bg-black w-[275px] xl:w-[250px] h-[225px] relative">
                     <Image src={"/image.jpg"} alt="image" layout="fill" />
                 </div>
-                <h3 className="text-xl w-[275px] xl:w-[250px]">Fngeen Men's Luxury Diamond Waterproof Quartz Watch - Gold</h3>
+                <h3 className="text-xl w-[275px] xl:w-[250px]">Fngeen Men{"'"}s Luxury Diamond Waterproof Quartz Watch - Gold</h3>
             </div>
         </Link>
     )
