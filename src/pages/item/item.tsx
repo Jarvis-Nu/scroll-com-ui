@@ -2,10 +2,19 @@ import Head from "next/head"
 import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
-import { ChatAlt2Icon } from "@heroicons/react/solid"
 import Card from "@/components/Card"
+import { Chat } from "@pushprotocol/uiweb";
+import { ITheme } from '@pushprotocol/uiweb';
+import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit"
+import { useSigner } from "wagmi"
 
 export default function Item() {
+    const theme: ITheme = {
+        btnColorPrimary: 'black'
+    }
+    const { openConnectModal } = useConnectModal();
+    const { openAccountModal } = useAccountModal();
+    const { data: signer } = useSigner()
     return(
         <div>
             <Head>
@@ -30,11 +39,8 @@ export default function Item() {
                                     tempora eligendi unde voluptates. Autem, ipsum voluptates.
                                 </p>
                                 <div className="space-y-1.5">
-                                    <h5 className="text-lg font-semibold">Contact seller</h5>
+                                    <h5 className="text-lg font-semibold">Share product</h5>
                                     <div className="flex space-x-1.5">
-                                        <button>
-                                            <ChatAlt2Icon className="w-10 h-10" />
-                                        </button>
                                         <button>
                                             <SocialIcon url="https://facebook.com" />
                                         </button>
@@ -79,6 +85,13 @@ export default function Item() {
                         </div>
                     </div>
                 </div>
+                <Chat
+                    account="0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73"
+                    supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
+                    modalTitle="Contact seller"
+                    theme={theme}
+                    env="prod"
+                />
             </main>
         </div>
     )

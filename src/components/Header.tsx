@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SearchIcon } from "@heroicons/react/outline"
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export default function Header() {
     return(
@@ -18,9 +19,12 @@ export default function Header() {
                         </button>
                     </div>
                 </div>
-                <div>
+                <div className="flex items-center space-x-5">
                     <button className="p-4 bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black">
                         Join Seller{"'"}s Dao
+                    </button>
+                    <button className="p-2 bg-black text-white">
+                        <ConnectButton />
                     </button>
                 </div>
             </div>
