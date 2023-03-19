@@ -97,7 +97,6 @@ export default function Item() {
                         supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
                         modalTitle="Contact seller"
                         theme={theme}
-                        env="prod"
                     /> : <button className="w-full bg-black text-white p-2.5 fixed bottom-0">
                         Connect wallet to chat seller
                     </button>
