@@ -3,7 +3,6 @@ import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import Card from "../../components/Card"
-import { Chat } from "@pushprotocol/uiweb";
 import { useSigner } from "wagmi"
 import { useState } from "react"
 
@@ -86,16 +85,6 @@ export default function Item() {
                         </div>
                     </div>
                 </div>
-                {
-                    address ? <Chat
-                        account={address}
-                        supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
-                        modalTitle="Contact seller"
-                        theme={theme}
-                    /> : <button className="w-full bg-black text-white p-2.5 fixed bottom-0">
-                        Connect wallet to chat seller
-                    </button>
-                }
             </main>
         </div>
     )
