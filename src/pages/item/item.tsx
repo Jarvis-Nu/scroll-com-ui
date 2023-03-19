@@ -6,7 +6,7 @@ import Card from "@/components/Card"
 import { Chat } from "@pushprotocol/uiweb";
 import { ITheme } from '@pushprotocol/uiweb';
 import { useSigner } from "wagmi"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export default function Item() {
     const theme: ITheme = {
@@ -14,17 +14,13 @@ export default function Item() {
     }
     const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
-    async function getAddress() {
+    const getAddress = useCallback(async() => {
         const addressData = await signer?.getAddress()
         if (addressData) {
             setAddress(addressData)
         }
-    }
-    try {
-        getAddress()
-    } catch (error) {
-        console.log(error)
-    }
+    }, [signer?.getAddress()])
+    getAddress()
     return(
         <div>
             <Head>
