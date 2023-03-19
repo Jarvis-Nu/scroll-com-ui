@@ -5,16 +5,22 @@ import { SocialIcon } from "react-social-icons"
 import Card from "@/components/Card"
 import { Chat } from "@pushprotocol/uiweb";
 import { ITheme } from '@pushprotocol/uiweb';
-import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit"
 import { useSigner } from "wagmi"
+import { useState } from "react"
 
 export default function Item() {
     const theme: ITheme = {
         btnColorPrimary: 'black'
     }
-    const { openConnectModal } = useConnectModal();
-    const { openAccountModal } = useAccountModal();
     const { data: signer } = useSigner()
+    const [address, setAddress] = useState("")
+    async function getAddress() {
+        const addressData = await signer?.getAddress()
+        if (addressData) {
+            setAddress(addressData)
+        }
+    }
+    getAddress()
     return(
         <div>
             <Head>
@@ -57,7 +63,7 @@ export default function Item() {
                                 </div>
                                 <div className="w-[275px] sm:w-full">
                                     <button className="w-full bg-black text-white py-2.5">
-                                        Purchase for 0.02SETH
+                                        {signer?.getAddress() ? "Purchase for 0.02SETH" : "Please connect wallet"}
                                     </button>
                                 </div>
                             </div>
@@ -85,13 +91,17 @@ export default function Item() {
                         </div>
                     </div>
                 </div>
-                <Chat
-                    account="0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73"
-                    supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
-                    modalTitle="Contact seller"
-                    theme={theme}
-                    env="prod"
-                />
+                {
+                    signer?.getAddress() ? <Chat
+                        account={address}
+                        supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
+                        modalTitle="Contact seller"
+                        theme={theme}
+                        env="prod"
+                    /> : <button className="w-full bg-black text-white p-2.5 fixed bottom-0">
+                        Connect wallet to chat seller
+                    </button>
+                }
             </main>
         </div>
     )
