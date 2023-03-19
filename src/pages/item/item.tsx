@@ -6,7 +6,7 @@ import Card from "@/components/Card"
 import { Chat } from "@pushprotocol/uiweb";
 import { ITheme } from '@pushprotocol/uiweb';
 import { useSigner } from "wagmi"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Item() {
     const theme: ITheme = {
@@ -14,13 +14,9 @@ export default function Item() {
     }
     const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
-    const getAddress = useCallback(async() => {
-        const addressData = await signer?.getAddress()
-        if (addressData) {
-            setAddress(addressData)
-        }
-    }, [signer?.getAddress()])
-    getAddress()
+    signer?.getAddress().then(function(result: string) {
+        setAddress(result)
+    })
     return(
         <div>
             <Head>
@@ -63,7 +59,7 @@ export default function Item() {
                                 </div>
                                 <div className="w-[275px] sm:w-full">
                                     <button className="w-full bg-black text-white py-2.5">
-                                        {signer?.getAddress() ? "Purchase for 0.02SETH" : "Please connect wallet"}
+                                        {address ? "Purchase for 0.02SETH" : "Please connect wallet"}
                                     </button>
                                 </div>
                             </div>
@@ -92,7 +88,7 @@ export default function Item() {
                     </div>
                 </div>
                 {
-                    signer?.getAddress() ? <Chat
+                    address ? <Chat
                         account={address}
                         supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d"
                         modalTitle="Contact seller"
