@@ -2,7 +2,7 @@ import Head from "next/head"
 import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
-import Card from "@/components/Card"
+import Card from "../../components/Card"
 import { Chat } from "@pushprotocol/uiweb";
 import { useSigner } from "wagmi"
 import { useState } from "react"
