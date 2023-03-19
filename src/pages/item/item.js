@@ -3,18 +3,29 @@ import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import Card from "../../components/Card"
-import { useSigner } from "wagmi"
+import { usePrepareSendTransaction, useSigner, useSendTransaction, useWaitForTransaction } from "wagmi"
+import { utils } from 'ethers'
 import { useState } from "react"
+import { useDebounce } from "use-debounce"
 
 export default function Item() {
-    const theme = {
-        btnColorPrimary: 'black'
-    }
     const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
     signer?.getAddress().then(function(result) {
         setAddress(result)
     }).catch(e => console.log(e))
+    const [debouncedTo] = useDebounce("0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73", 0)
+    const [debouncedAmount] = useDebounce("0", 0)
+    const { config } = usePrepareSendTransaction({
+        request: {
+          to: debouncedTo,
+          value: debouncedAmount ? utils.parseEther(debouncedAmount) : undefined,
+        },
+    })
+    const { data, sendTransaction } = useSendTransaction(config)
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
+    })
     return(
         <div>
             <Head>
@@ -56,7 +67,7 @@ export default function Item() {
                                     </div>
                                 </div>
                                 <div className="w-[275px] sm:w-full">
-                                    <button className="w-full bg-black text-white py-2.5">
+                                    <button className="w-full bg-black text-white py-2.5" onClick={sendTransaction}>
                                         {address ? "Purchase for 0.02SETH" : "Please connect wallet"}
                                     </button>
                                 </div>
