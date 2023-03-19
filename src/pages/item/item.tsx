@@ -20,7 +20,7 @@ export default function Item() {
             setAddress(addressData)
         }
     }
-    getAddress()
+    getAddress().then(() => console.log(address))
     return(
         <div>
             <Head>
