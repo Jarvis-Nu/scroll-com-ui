@@ -20,7 +20,11 @@ export default function Item() {
             setAddress(addressData)
         }
     }
-    getAddress().then(() => console.log(address))
+    try {
+        getAddress()
+    } catch (error) {
+        console.log(error)
+    }
     return(
         <div>
             <Head>
