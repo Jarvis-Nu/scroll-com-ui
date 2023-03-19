@@ -1,4 +1,3 @@
-import { type AppType } from "next/dist/shared/lib/utils";
 import "@/styles/globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import {
@@ -13,7 +12,7 @@ import { publicProvider } from 'wagmi/providers/public';
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
   [
-    alchemyProvider({ apiKey: process.env.ALCHEMY_ID || "" }),
+    alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider()
   ]
 );
@@ -30,7 +29,7 @@ const wagmiClient = createClient({
 })
 
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps }) => {
   return (
   <WagmiConfig client={wagmiClient}>
     <RainbowKitProvider chains={chains} theme={darkTheme({

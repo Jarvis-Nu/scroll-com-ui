@@ -4,17 +4,16 @@ import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import Card from "@/components/Card"
 import { Chat } from "@pushprotocol/uiweb";
-import { ITheme } from '@pushprotocol/uiweb';
 import { useSigner } from "wagmi"
 import { useState } from "react"
 
 export default function Item() {
-    const theme: ITheme = {
+    const theme = {
         btnColorPrimary: 'black'
     }
     const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
-    signer?.getAddress().then(function(result: string) {
+    signer?.getAddress().then(function(result) {
         setAddress(result)
     }).catch(e => console.log(e))
     return(
