@@ -3,16 +3,13 @@ import Header from "../../components/Header"
 import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import Card from "../../components/Card"
-import { usePrepareSendTransaction, useSigner, useSendTransaction, useWaitForTransaction } from "wagmi"
 import { ethers, utils } from 'ethers'
 import { useState } from "react"
-import { useDebounce } from "use-debounce"
 import { modalState } from "../../../atom/modal"
 import { useRecoilState } from "recoil"
 import Modal from "../../components/Modal"
 
 export default function Item() {
-    const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
     async function connect() {
         const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -20,35 +17,16 @@ export default function Item() {
         let account = accounts[0];
         provider.on('accountsChanged', function (accounts) {
             account = accounts[0];
-            setAddress(address); // Print new address
+            setAddress(address)
         });
     
         const signer = provider.getSigner();
     
         const address = await signer.getAddress();
-        
+
         setAddress(address)
     }
     connect()
-    // if (signer?.getAddress()) {
-    //     signer?.getAddress().then(function(result) {
-    //         if (result) {
-    //             setAddress(result)
-    //         }
-    //     }).catch(e => console.log(e))
-    // }
-    // const [debouncedTo] = useDebounce("0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73", 0)
-    // const [debouncedAmount] = useDebounce("0", 0)
-    // const { config } = usePrepareSendTransaction({
-    //     request: {
-    //       to: debouncedTo,
-    //       value: debouncedAmount ? utils.parseEther(debouncedAmount) : undefined,
-    //     },
-    // })
-    // const { data, sendTransaction } = useSendTransaction(config)
-    // const { isLoading, isSuccess } = useWaitForTransaction({
-    //     hash: data?.hash,
-    // })
     const [open, setOpen] = useRecoilState(modalState)
     return(
         <div>
@@ -99,7 +77,7 @@ export default function Item() {
                                             await connect()
                                         }
                                     }}>
-                                        {address ? "Purchase for 0.02SETH" : "Please connect wallet"}
+                                        {address ? "Purchase for 0.01SET" : "Please connect wallet"}
                                     </button>
                                 </div>
                             </div>

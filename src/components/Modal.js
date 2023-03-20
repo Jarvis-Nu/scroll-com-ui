@@ -2,10 +2,24 @@ import { Dialog, Transition } from "@headlessui/react"
 import { modalState } from "../../atom/modal"
 import { useRecoilState } from "recoil"
 import { Fragment } from "react"
-import { XIcon } from "@heroicons/react/outline"
+import { utils } from 'ethers'
+import { usePrepareSendTransaction, useSendTransaction, useWaitForTransaction } from "wagmi"
+import { useDebounce } from "use-debounce"
 
 export default function Modal() {
     const [open, setOpen] = useRecoilState(modalState)
+    const [debouncedTo] = useDebounce("0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73", 0)
+    const [debouncedAmount] = useDebounce("0.01", 0)
+    const { config } = usePrepareSendTransaction({
+        request: {
+          to: debouncedTo,
+          value: debouncedAmount ? utils.parseEther(debouncedAmount) : undefined,
+        },
+    })
+    const { data, sendTransaction } = useSendTransaction(config)
+    const { isLoading, isSuccess } = useWaitForTransaction({
+        hash: data?.hash,
+    })
     return(
         <Transition.Root show={open} as={Fragment}>
             <Dialog
@@ -45,13 +59,17 @@ export default function Modal() {
                     >
                         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left
                             overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-                                <div className="w-full">
-                                    <div className="w-full flex items-center justify-between">
-                                        <h3 className="text-2xl font-semibold">Fill out form</h3>
-                                        <button onClick={() => setOpen(false)}>
-                                            <XIcon className="w-10 h-10" />
-                                        </button>
+                                <div className="w-full space-y-2.5">
+                                    <h3 className="text-2xl font-semibold">Fill out form</h3>
+                                    <div>
+                                        <input type="text" placeholder="Enter name" className='w-full border-black/30 border-2 h-10 px-1.5 outline-none' />
                                     </div>
+                                    <div>
+                                        <input type="text" placeholder="Enter location of P.O box" className='w-full border-black/30 border-2 h-10 px-1.5 outline-none' />
+                                    </div>
+                                    <button className="bg-black p-3 w-full text-white" onClick={sendTransaction} disabled={isLoading ? true : isSuccess ? false : false}>
+                                        { isLoading ? "Paying..." : isSuccess ? "Payed!" : "Pay 0.01SET"}
+                                    </button>
                                 </div>
                         </div>
                     </Transition.Child>
