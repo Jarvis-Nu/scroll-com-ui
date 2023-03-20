@@ -9,6 +9,7 @@ import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { RecoilRoot } from "recoil";
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
   [
@@ -28,7 +29,6 @@ const wagmiClient = createClient({
   provider
 })
 
-
 const MyApp = ({ Component, pageProps }) => {
   return (
   <WagmiConfig client={wagmiClient}>
@@ -39,7 +39,9 @@ const MyApp = ({ Component, pageProps }) => {
       fontStack: 'system',
       overlayBlur: 'small',
     })}>
-      <Component {...pageProps} />
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
     </RainbowKitProvider>
   </WagmiConfig>
   )
