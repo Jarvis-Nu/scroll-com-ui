@@ -9,7 +9,7 @@ import { useDebounce } from "use-debounce"
 export default function Modal() {
     const [open, setOpen] = useRecoilState(modalState)
     const [debouncedTo] = useDebounce("0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73", 0)
-    const [debouncedAmount] = useDebounce("0.01", 0)
+    const [debouncedAmount] = useDebounce("0", 0)
     const { config } = usePrepareSendTransaction({
         request: {
           to: debouncedTo,
