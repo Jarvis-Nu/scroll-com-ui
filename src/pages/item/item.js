@@ -4,7 +4,7 @@ import Image from "next/legacy/image"
 import { SocialIcon } from "react-social-icons"
 import Card from "../../components/Card"
 import { usePrepareSendTransaction, useSigner, useSendTransaction, useWaitForTransaction } from "wagmi"
-import { utils } from 'ethers'
+import { ethers, utils } from 'ethers'
 import { useState } from "react"
 import { useDebounce } from "use-debounce"
 import { modalState } from "../../../atom/modal"
@@ -14,9 +14,29 @@ import Modal from "../../components/Modal"
 export default function Item() {
     const { data: signer } = useSigner()
     const [address, setAddress] = useState("")
-    signer?.getAddress().then(function(result) {
-        setAddress(result)
-    }).catch(e => console.log(e))
+    async function connect() {
+        const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+        let accounts = await provider.send("eth_requestAccounts", []);
+        let account = accounts[0];
+        provider.on('accountsChanged', function (accounts) {
+            account = accounts[0];
+            setAddress(address); // Print new address
+        });
+    
+        const signer = provider.getSigner();
+    
+        const address = await signer.getAddress();
+        
+        setAddress(address)
+    }
+    connect()
+    // if (signer?.getAddress()) {
+    //     signer?.getAddress().then(function(result) {
+    //         if (result) {
+    //             setAddress(result)
+    //         }
+    //     }).catch(e => console.log(e))
+    // }
     // const [debouncedTo] = useDebounce("0x5C04F69c9603A808BF4157Ef959F1Ed1e16c0F73", 0)
     // const [debouncedAmount] = useDebounce("0", 0)
     // const { config } = usePrepareSendTransaction({
@@ -71,7 +91,14 @@ export default function Item() {
                                     </div>
                                 </div>
                                 <div className="w-[275px] sm:w-full">
-                                    <button className="w-full bg-black text-white py-2.5" onClick={() => setOpen(true)}>
+                                    <button className="w-full bg-black text-white py-2.5" onClick={async() => {
+                                        if (address) {
+                                            setOpen(true)
+                                        }
+                                        else {
+                                            await connect()
+                                        }
+                                    }}>
                                         {address ? "Purchase for 0.02SETH" : "Please connect wallet"}
                                     </button>
                                 </div>
